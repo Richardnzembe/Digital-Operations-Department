@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamo | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --royal-blue: #4169e1;
+            --royal-blue-dark: #3451b2;
+            --royal-blue-light: #6d8af0;
+            --warm-gray: #8c8c8c;
+            --warm-gray-light: #e8e8e8;
+            --warm-gray-dark: #5a5a5a;
+            --white: #ffffff;
+            --light-bg: #f8f9fc;
+            --gold-accent: #d4af37;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6edff 100%);
+            color: var(--warm-gray-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 252, 0.95) 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-dark) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 4s infinite;
+        }
+        
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+        }
+        
+        .logo-circle:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-circle span {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--white);
+            z-index: 2;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--warm-gray-dark);
+            position: relative;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--warm-gray-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav li {
+            margin-left: 25px;
+        }
+        
+        nav a {
+            color: var(--warm-gray-dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--royal-blue);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--royal-blue), var(--royal-blue-dark));
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hire-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-dark) 100%);
+            color: var(--white);
+            padding: 10px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-left: 15px;
+            box-shadow: 0 4px 12px rgba(65, 105, 225, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .hire-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(65, 105, 225, 0.35);
+        }
+        
+        /* Portfolio Hero Section */
+        .portfolio-hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #0d1b36 0%, #1c2d4e 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(65, 105, 225, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 20%);
+            z-index: 1;
+        }
+        
+        .portfolio-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .portfolio-hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            line-height: 1.15;
+            position: relative;
+            padding-bottom: 20px;
+            background: linear-gradient(to right, #6d8af0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .portfolio-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--royal-blue), var(--gold-accent));
+            border-radius: 2px;
+        }
+        
+        .portfolio-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 35px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Portfolio Grid */
+        .portfolio-grid {
+            padding: 80px 0;
+            background: transparent;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--warm-gray-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--warm-gray-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--royal-blue), var(--royal-blue-dark));
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--warm-gray);
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .portfolio-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            height: 450px;
+            background: var(--white);
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
+        .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
+        .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
+        .portfolio-item:nth-child(4) { animation-delay: 0.4s; }
+        .portfolio-item:nth-child(5) { animation-delay: 0.5s; }
+        .portfolio-item:nth-child(6) { animation-delay: 0.6s; }
+        
+        .portfolio-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(65, 105, 225, 0.2);
+        }
+        
+        .item-image {
+            height: 65%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease, filter 0.5s ease;
+        }
+        
+        .portfolio-item:hover .item-image img {
+            transform: scale(1.1);
+            filter: brightness(1.05);
+        }
+        
+        .item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(13, 27, 54, 0.8), transparent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .portfolio-item:hover .item-overlay {
+            opacity: 1;
+        }
+        
+        .view-project {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-dark) 100%);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transform: translateY(20px);
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .view-project {
+            transform: translateY(0);
+        }
+        
+        .view-project i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .view-project:hover i {
+            transform: translateX(5px);
+        }
+        
+        .item-content {
+            padding: 25px;
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .item-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--warm-gray-dark);
+            transition: color 0.3s ease;
+        }
+        
+        .portfolio-item:hover .item-content h3 {
+            color: var(--royal-blue);
+        }
+        
+        .item-content p {
+            color: var(--warm-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.1) 0%, rgba(248, 249, 252, 0.8) 100%);
+            color: var(--royal-blue);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(65, 105, 225, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-dark) 100%);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Creative Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(450px, auto);
+            gap: 30px;
+        }
+        
+        .portfolio-item:nth-child(1) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        
+        .portfolio-item:nth-child(2) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        
+        .portfolio-item:nth-child(3) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        
+        .portfolio-item:nth-child(4) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        
+        .portfolio-item:nth-child(5) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        
+        .portfolio-item:nth-child(6) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        
+        /* Portfolio Stats */
+        .portfolio-stats {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0d1b36 0%, #1c2d4e 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+        }
+        
+        .section-title.light h2 {
+            background: linear-gradient(to right, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title.light p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--royal-blue), var(--gold-accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1;
+            background: linear-gradient(to bottom, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-title {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cta p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .cta .btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--royal-blue);
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .cta .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-dark) 100%);
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+        
+        .cta .btn:hover::before {
+            width: 100%;
+        }
+        
+        .cta .btn:hover {
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(65, 105, 225, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(65, 105, 225, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(65, 105, 225, 0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .portfolio-item:nth-child(4),
+            .portfolio-item:nth-child(6) {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 24px;
+                color: var(--warm-gray-dark);
+                cursor: pointer;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-item:nth-child(4),
+            .portfolio-item:nth-child(6) {
+                grid-column: span 1;
+            }
+            
+            .portfolio-hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .portfolio-hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-circle">
+                    <span>D</span>
+                </div>
+                <div class="logo-text">DYNAMO</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#" class="active">Portfolio</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#" class="hire-btn">Hire Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Portfolio Hero Section -->
+    <section class="portfolio-hero">
+        <div class="container">
+            <div class="portfolio-hero-content">
+                <h1>Creative Portfolio</h1>
+                <p>Explore our collection of innovative projects that showcase our expertise in web design, content creation, and digital solutions. Each project represents our commitment to excellence and client satisfaction.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="portfolio-grid">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+                <p>Our portfolio showcases innovative solutions across industries</p>
+            </div>
+            
+            <div class="grid-container">
+                <!-- Project 1 -->
+                <div class="portfolio-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate Website Design">
+                        <div class="item-overlay">
+                            <a href="#" class="view-project">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Corporate Brand Platform</h3>
+                        <p>Complete website redesign for a financial services company with custom CMS integration.</p>
+                        <div class="item-tags">
+                            <span class="tag">Web Design</span>
+                            <span class="tag">WordPress</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="E-Learning Platform">
+                        <div class="item-overlay">
+                            <a href="#" class="view-project">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h3>University LMS Platform</h3>
+                        <p>Custom Moodle-based learning management system for a leading educational institution.</p>
+                        <div class="item-tags">
+                            <span class="tag">LMS Solutions</span>
+                            <span class="tag">Moodle</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Content Strategy">
+                        <div class="item-overlay">
+                            <a href="#" class="view-project">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Healthcare Brand Identity</h3>
+                        <p>Complete brand development including logo, style guide, and marketing materials.</p>
+                        <div class="item-tags">
+                            <span class="tag">Brand Identity</span>
+                            <span class="tag">Canva</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Educational Materials">
+                        <div class="item-overlay">
+                            <a href="#" class="view-project">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>Custom WooCommerce solution with inventory management and payment integration.</p>
+                        <div class="item-tags">
+                            <span class="tag">E-Commerce</span>
+                            <span class="tag">Web Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brand Identity">
+                        <div class="item-overlay">
+                            <a href="#" class="view-project">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Professional Training Program</h3>
+                        <p>Complete course development including videos, workbooks, and assessments.</p>
+                        <div class="item-tags">
+                            <span class="tag">Educational</span>
+                            <span class="tag">Training</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="E-Commerce Solution">
+                        <div class="item-overlay">
+                            <a href="#" class="view-project">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Content Ecosystem Development</h3>
+                        <p>Comprehensive content strategy and creation for a tech startup's digital presence.</p>
+                        <div class="item-tags">
+                            <span class="tag">Content Creation</span>
+                            <span class="tag">Strategy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Stats -->
+    <section class="portfolio-stats">
+        <div class="container">
+            <div class="section-title light">
+                <h2>Our Impact in Numbers</h2>
+                <p>Quantifying our creative journey and client success</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-title">Projects Completed</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-title">Client Satisfaction</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-title">Happy Clients</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-title">Industry Awards</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Our team of expert content creators is ready to bring your vision to life with professional design, development, and content solutions.</p>
+            <a href="#" class="btn">Get in Touch Today</a>
+        </div>
+    </section>
+
+    <script>
+        // Portfolio item animations
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        portfolioItems.forEach(item => {
+            item.style.opacity = 0;
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(item);
+        });
+        
+        // Stats counter animation
+        const stats = document.querySelectorAll('.stat-number');
+        const statsSection = document.querySelector('.portfolio-stats');
+        
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    stats.forEach(stat => {
+                        const target = +stat.innerText.replace('+', '');
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                clearInterval(timer);
+                                stat.innerText = stat.innerText.includes('+') ? target + '+' : target;
+                            } else {
+                                stat.innerText = Math.floor(current);
+                            }
+                        }, 16);
+                    });
+                    
+                    statsObserver.unobserve(statsSection);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        statsObserver.observe(statsSection);
+    </script>
+</body>
+</html>
