@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Operations | Dalswin Institute</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
@@ -14,13 +14,13 @@
             --secondary: #112240;
             --accent: #64ffda;
             --light: #ccd6f6;
-            --highlight: #ff6b6b;
-            --teal: #5eead4;
-            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --dark: #020c1b;
+            --highlight: #5eead4;
+            --teal: #14b8a6;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --gradient-primary: linear-gradient(135deg, #0a192f 0%, #0d2b4a 100%);
             --gradient-accent: linear-gradient(135deg, #64ffda 0%, #5eead4 100%);
-            --gradient-highlight: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
-            --gradient-teal: linear-gradient(135deg, #5eead4 0%, #14b8a6 100%);
+            --gradient-card: linear-gradient(145deg, #112240, #0a1a36);
         }
         
         * {
@@ -64,6 +64,12 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
         }
         
         .header-container {
@@ -118,6 +124,10 @@
             width: 100%;
         }
         
+        nav a.active {
+            color: var(--accent);
+        }
+        
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -148,13 +158,13 @@
         }
         
         .hero h1 {
-            font-size: 3.8rem;
+            font-size: 4.2rem;
             color: white;
             margin-bottom: 25px;
             line-height: 1.1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .hero p {
@@ -162,7 +172,9 @@
             max-width: 700px;
             margin-bottom: 40px;
             font-weight: 400;
-            opacity: 0.9;
+            opacity: 0;
+            transform: translateY(30px);
+            color: var(--light);
         }
         
         .hero-highlight {
@@ -183,6 +195,8 @@
             transition: var(--transition);
             text-transform: uppercase;
             font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .hero-btn:hover {
@@ -191,44 +205,11 @@
             box-shadow: 0 10px 20px rgba(100, 255, 218, 0.2);
         }
         
-        /* Animated Shapes */
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: rgba(100, 255, 218, 0.1);
-            top: 10%;
-            right: 15%;
-            animation: float 12s infinite ease-in-out;
-        }
-        
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 107, 107, 0.1);
-            bottom: 20%;
-            left: 10%;
-            animation: float 15s infinite ease-in-out;
-        }
-        
-        .shape-3 {
-            width: 150px;
-            height: 150px;
-            background: rgba(94, 234, 212, 0.1);
-            top: 40%;
-            left: 20%;
-            animation: float 10s infinite ease-in-out;
-        }
-        
         /* Section Styling */
         section {
             padding: 120px 0;
             position: relative;
+            overflow: hidden;
         }
         
         .section-header {
@@ -243,6 +224,8 @@
             position: relative;
             margin-bottom: 25px;
             font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .section-header h2::after {
@@ -262,7 +245,8 @@
             margin: 30px auto 0;
             font-size: 1.2rem;
             color: var(--teal);
-            opacity: 0.9;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         /* About Section */
@@ -275,6 +259,8 @@
         
         .about-text {
             padding-right: 20px;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .about-text h3 {
@@ -288,7 +274,7 @@
             margin-bottom: 25px;
             font-size: 1.1rem;
             line-height: 1.8;
-            opacity: 0.9;
+            color: var(--light);
         }
         
         .about-image {
@@ -297,8 +283,9 @@
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             height: 450px;
-            background: var(--gradient-teal);
+            background: var(--secondary);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
@@ -307,6 +294,25 @@
             text-align: center;
             padding: 40px;
             border: 1px solid rgba(100, 255, 218, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-image i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover i {
+            transform: scale(1.2);
         }
         
         /* Services Section */
@@ -321,23 +327,20 @@
         }
         
         .service-card {
-            background: rgba(17, 34, 64, 0.7);
-            border-radius: 10px;
+            background: var(--gradient-card);
+            border-radius: 15px;
             padding: 45px 35px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: var(--transition);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
             position: relative;
             overflow: hidden;
             z-index: 1;
             border: 1px solid rgba(100, 255, 218, 0.1);
             backdrop-filter: blur(5px);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.2);
-            border-color: rgba(100, 255, 218, 0.3);
+            opacity: 0;
+            transform: translateY(30px) rotateX(90deg);
+            transform-style: preserve-3d;
         }
         
         .service-card::before {
@@ -346,15 +349,25 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 0;
+            height: 100%;
             background: var(--gradient-accent);
+            opacity: 0;
             z-index: -1;
-            transition: var(--transition);
-            opacity: 0.1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px) rotateX(0);
+            box-shadow: 0 25px 50px rgba(100, 255, 218, 0.2);
+            border-color: rgba(100, 255, 218, 0.3);
         }
         
         .service-card:hover::before {
-            height: 100%;
+            opacity: 0.1;
+        }
+        
+        .service-card:active {
+            transform: scale(0.98) translateY(-5px);
         }
         
         .service-icon {
@@ -366,19 +379,25 @@
         }
         
         .service-card:hover .service-icon {
-            transform: scale(1.1);
+            transform: scale(1.2) rotate(5deg);
+            color: var(--highlight);
         }
         
         .service-card h3 {
             font-size: 1.6rem;
             margin-bottom: 20px;
             transition: var(--transition);
+            color: var(--light);
+        }
+        
+        .service-card:hover h3 {
+            color: var(--accent);
         }
         
         .service-card p {
             transition: var(--transition);
             font-size: 1.05rem;
-            opacity: 0.85;
+            color: var(--light);
         }
         
         /* Collaboration Section */
@@ -392,7 +411,7 @@
         }
         
         .collaboration .section-header h2::after {
-            background: var(--highlight);
+            background: var(--accent);
         }
         
         .collab-content {
@@ -404,7 +423,7 @@
         
         .highlight-box {
             background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--highlight);
+            border-left: 4px solid var(--accent);
             padding: 35px;
             margin: 50px 0;
             border-radius: 0 8px 8px 0;
@@ -413,17 +432,44 @@
             position: relative;
             overflow: hidden;
             font-size: 1.1rem;
+            color: var(--light);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
         }
         
-        .highlight-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.03), transparent);
-            z-index: -1;
+        .highlight-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: var(--primary);
+            padding: 16px 38px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
+        }
+        
+        .contact-btn:active {
+            transform: scale(0.95);
         }
         
         /* Innovation Section */
@@ -436,6 +482,8 @@
         
         .innovation-text {
             padding-left: 20px;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .values-list {
@@ -448,6 +496,14 @@
             position: relative;
             list-style: none;
             font-size: 1.1rem;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .values-list li:hover {
+            color: var(--accent);
+            transform: translateX(10px);
         }
         
         .values-list li::before {
@@ -483,15 +539,18 @@
         .stat-item {
             padding: 40px 30px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            border-radius: 15px;
             backdrop-filter: blur(5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(100, 255, 218, 0.1);
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: scale(0.8);
         }
         
         .stat-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(100, 255, 218, 0.2);
             border-color: rgba(100, 255, 218, 0.3);
         }
         
@@ -509,6 +568,7 @@
             font-size: 1.2rem;
             font-weight: 500;
             opacity: 0.9;
+            color: var(--light);
         }
         
         /* Footer */
@@ -602,15 +662,28 @@
             100% { transform: scale(1); opacity: 0.8; }
         }
         
-        .animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        .animate.appear {
-            opacity: 1;
-            transform: translateY(0);
+        /* Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.2);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+            animation: float 15s infinite ease-in-out;
         }
         
         /* Responsive Design */
@@ -643,10 +716,6 @@
             
             .section-header h2 {
                 font-size: 2.4rem;
-            }
-            
-            .shape-1, .shape-2, .shape-3 {
-                display: none;
             }
         }
         
@@ -682,33 +751,35 @@
     </style>
 </head>
 <body>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+    
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container header-container">
             <div class="logo">
-                <i class="fas fa-gem logo-icon"></i>
-                <span>DL&BI DOD</span>
+                <i class="fas fa-brain logo-icon"></i>
+                <span>DALSWIN</span>
             </div>
             <nav>
                 <ul>
-                    <li><a href="https://digitaloperationdepartment.lifelight.foundation/DDOD-about.html">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Departments</a></li>
-                    <li><a href="https://lifelight.foundation/contact-2/">Contact</a></li>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#collaboration">Collaborate</a></li>
+                    <li><a href="#innovation">Innovation</a></li>
+                    <li><a href="https://lifelight.foundation/contact-2/" class="contact-btn">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
+    <section class="hero" id="hero">
         <div class="container hero-content">
-            <h1 class="animate">Digital Operations Department</h1>
-            <p class="animate">At the heart of <span class="hero-highlight">Dalswin Life & Business Institute's</span> digital experience is our <span class="hero-highlight">Digital Operations Department</span>—a dynamic team of skilled professionals responsible for bringing our online presence to life.</p>
-            <a href="#about" class="hero-btn animate">Explore Our Work</a>
+            <h1>Digital Operations Department</h1>
+            <p>At the heart of <span class="hero-highlight">Dalswin Life & Business Institute's</span> digital experience is our <span class="hero-highlight">Digital Operations Department</span>—a dynamic team of skilled professionals responsible for bringing our online presence to life.</p>
+            <a href="#about" class="hero-btn">Digital Oparation Department</a>
         </div>
     </section>
 
@@ -716,19 +787,19 @@
     <section id="about">
         <div class="container">
             <div class="section-header">
-                <h2 class="animate">About Our Department</h2>
-                <p class="animate">We combine expertise across multiple disciplines to create exceptional digital learning experiences</p>
+                <h2>About Our Department</h2>
+                <p>We combine expertise across multiple disciplines to create exceptional digital learning experiences</p>
             </div>
             
             <div class="about-content">
-                <div class="about-text animate">
+                <div class="about-text">
                     <h3>More Than Just Designers</h3>
                     <p>Our team combines expertise in web development, content engineering, learning platform management (LMS), multimedia creation, and technical support to ensure that our digital learning environment is engaging, reliable, and effective.</p>
                     <p>From building and maintaining our official website to designing e-learning content and managing our virtual classrooms, the Digital Operations team plays a key role in making Dalswin's vision accessible to students across the globe.</p>
                     <p>We pride ourselves on staying at the forefront of digital innovation, constantly exploring new technologies and methodologies to enhance the learning experience.</p>
                 </div>
-                <div class="about-image animate">
-                    <i class="fas fa-network-wired fa-4x" style="margin-bottom: 25px; color: rgba(255,255,255,0.9);"></i>
+                <div class="about-image">
+                    <i class="fas fa-network-wired"></i>
                     <div>Transforming Digital Education Through Innovation and Excellence</div>
                 </div>
             </div>
@@ -736,15 +807,15 @@
     </section>
 
     <!-- Services Section -->
-    <section class="services">
+    <section class="services" id="services">
         <div class="container">
             <div class="section-header">
-                <h2 class="animate">What We Do</h2>
-                <p class="animate">Comprehensive digital solutions for modern learning environments</p>
+                <h2>What We Do</h2>
+                <p>Comprehensive digital solutions for modern learning environments</p>
             </div>
             
             <div class="services-grid">
-                <div class="service-card animate">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
@@ -752,7 +823,7 @@
                     <p>Building and updating our online platforms for seamless user experiences across all devices and browsers.</p>
                 </div>
                 
-                <div class="service-card animate">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
@@ -760,7 +831,7 @@
                     <p>Setting up, configuring, and managing virtual learning environments that deliver our programs efficiently.</p>
                 </div>
                 
-                <div class="service-card animate">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-video"></i>
                     </div>
@@ -768,7 +839,7 @@
                     <p>Designing course visuals, videos, and downloadable resources that support interactive learning.</p>
                 </div>
                 
-                <div class="service-card animate">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-headset"></i>
                     </div>
@@ -783,24 +854,24 @@
     <section class="stats">
         <div class="container">
             <div class="section-header">
-                <h2 class="animate">Our Impact</h2>
-                <p class="animate">Driving excellence in digital education</p>
+                <h2>Our Impact</h2>
+                <p>Driving excellence in digital education</p>
             </div>
             
             <div class="stats-grid">
-                <div class="stat-item animate">
+                <div class="stat-item">
                     <div class="stat-number">98%</div>
                     <div class="stat-label">Platform Uptime</div>
                 </div>
-                <div class="stat-item animate">
-                    <div class="stat-number">150+</div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
                     <div class="stat-label">Courses Managed</div>
                 </div>
-                <div class="stat-item animate">
-                    <div class="stat-number">45K</div>
+                <div class="stat-item">
+                    <div class="stat-number">900+</div>
                     <div class="stat-label">Monthly Users</div>
                 </div>
-                <div class="stat-item animate">
+                <div class="stat-item">
                     <div class="stat-number">24/7</div>
                     <div class="stat-label">Technical Support</div>
                 </div>
@@ -809,19 +880,21 @@
     </section>
 
     <!-- Collaboration Section -->
-    <section class="collaboration">
+    <section class="collaboration" id="collaboration">
         <div class="container">
             <div class="section-header">
-                <h2 class="animate">Internal Experts, Open to Collaboration</h2>
-                <p class="animate">Extending our expertise beyond the institute</p>
+                <h2>Internal Experts, Open to Collaboration</h2>
+                <p>Extending our expertise beyond the institute</p>
             </div>
             
             <div class="collab-content">
-                <p class="animate">While our primary role is to serve the mission of Dalswin Life & Business Institute, our team is also available for select external collaborations and contract-based projects.</p>
+                <p>While our primary role is to serve the mission of Dalswin Life & Business Institute, our team is also available for select external collaborations and contract-based projects.</p>
                 
-                <div class="highlight-box animate">
+                <div class="highlight-box">
                     <p>If you are a business, educator, or content creator seeking technical or digital support, our department may be able to assist you—depending on availability and scope. We specialize in creating custom digital solutions that enhance learning experiences and operational efficiency.</p>
                 </div>
+                
+                <a href="https://lifelight.foundation/contact-2/" class="contact-btn">Request Collaboration</a>
             </div>
         </div>
     </section>
@@ -830,16 +903,16 @@
     <section id="innovation">
         <div class="container">
             <div class="section-header">
-                <h2 class="animate">Driving Digital Innovation at Dalswin</h2>
-                <p class="animate">Our commitment to excellence in digital education</p>
+                <h2>Driving Digital Innovation at Dalswin</h2>
+                <p>Our commitment to excellence in digital education</p>
             </div>
             
             <div class="innovation-content">
-                <div class="about-image animate">
-                    <i class="fas fa-lightbulb fa-4x" style="margin-bottom: 25px; color: rgba(255,255,255,0.9);"></i>
+                <div class="about-image">
+                    <i class="fas fa-lightbulb"></i>
                     <div>Digital Excellence in Education</div>
                 </div>
-                <div class="innovation-text animate">
+                <div class="innovation-text">
                     <p>We are committed to maintaining the highest standards of digital quality and innovation. Whether it's launching new features on our LMS, optimizing our platforms for mobile learners, or enhancing visual design across our courses, we work behind the scenes to ensure our digital presence reflects the values of learning, growth, and excellence.</p>
                     
                     <ul class="values-list">
@@ -868,11 +941,10 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="https://digitaloperationdepartment.lifelight.foundation/DDOD-about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Our Programs</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Faculty</a></li>
-                        <li><a href="https://digitaloperationdepartment.lifelight.foundation/Digital-Operations-Department.html#"><i class="fas fa-chevron-right"></i> Blog</a></li>
-                        <li><a href="https://lifelight.foundation/contact-2/"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#hero"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#innovation"><i class="fas fa-chevron-right"></i> Innovation</a></li>
                     </ul>
                 </div>
                 
@@ -887,85 +959,265 @@
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3>Connect With Us</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Masvingo</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> dodepartment@lifelight.foundation</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Dalswin Life & Business Institute. All rights reserved.</p>
+                <p>&copy; 2023 Dalswin Life & Business Institute. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Create animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
         // Initialize GSAP animations
         function initAnimations() {
-            // Animate elements on scroll
-            gsap.registerPlugin(ScrollTrigger);
+            // Animate hero section
+            gsap.to('.hero h1', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 0.3
+            });
             
-            // Animate all .animate elements
-            gsap.utils.toArray('.animate').forEach(element => {
-                gsap.fromTo(element, 
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: element,
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        }
+            gsap.to('.hero p', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 0.6
+            });
+            
+            gsap.to('.hero-btn', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 0.9
+            });
+            
+            // Animate section headers
+            gsap.utils.toArray('.section-header h2').forEach((header, index) => {
+                gsap.to(header, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: header,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
                     }
-                );
+                });
             });
             
-            // Floating shapes animation
-            gsap.to(".shape-1", {
-                y: 30,
-                duration: 8,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut"
+            gsap.utils.toArray('.section-header p').forEach((p, index) => {
+                gsap.to(p, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: p,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                });
             });
             
-            gsap.to(".shape-2", {
-                y: -40,
-                duration: 10,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut"
-            });
-            
-            gsap.to(".shape-3", {
-                y: 25,
-                duration: 7,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut"
-            });
-            
-            // Header scroll effect
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 100) {
-                    header.style.padding = '15px 0';
-                    header.style.background = 'rgba(10, 25, 47, 0.98)';
-                } else {
-                    header.style.padding = '20px 0';
-                    header.style.background = 'rgba(10, 25, 47, 0.95)';
+            // Animate about section
+            gsap.to('.about-text', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.about-text',
+                    start: "top 85%",
+                    toggleActions: "play none none none"
                 }
+            });
+            
+            gsap.to('.about-image', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.about-image',
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            // Animate service cards
+            gsap.utils.toArray('.service-card').forEach((card, index) => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    },
+                    delay: index * 0.2
+                });
+            });
+            
+            // Animate stats
+            gsap.utils.toArray('.stat-item').forEach((stat, index) => {
+                gsap.to(stat, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    },
+                    delay: index * 0.1
+                });
+            });
+            
+            // Animate collaboration section
+            gsap.to('.highlight-box', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.highlight-box',
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            gsap.to('.contact-btn', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.contact-btn',
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            // Animate innovation section
+            gsap.to('.innovation-text', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.innovation-text',
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+        }
+        
+        // Navigation functionality
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('nav a:not(.contact-btn)');
+            const header = document.getElementById('header');
+            let lastScroll = 0;
+            
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Scroll to section
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Highlight active section in navigation
+            const sections = document.querySelectorAll('section');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY;
+                
+                // Header show/hide
+                if (scrollPosition > lastScroll && scrollPosition > 200) {
+                    header.classList.add('hidden');
+                } else {
+                    header.classList.remove('hidden');
+                }
+                lastScroll = scrollPosition;
+                
+                // Active section
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
             });
         }
         
         // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
             initAnimations();
+            setupNavigation();
         });
     </script>
 </body>
